@@ -11,9 +11,8 @@ def read_text() :
 
 def task1() :
     global text
-    #names = re.findall("([А-Я]\. ?[А-Я][а-я]+)[^А-Яа-я]", text)
     names = re.findall("[^А-ЯЁ]([А-ЯЁ]\. ?[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?)", text)
-    names.sort()
+    names.sort() #так красивее
     for name in names :
         print(name)
 
@@ -21,6 +20,9 @@ def task2() :
     global text
     global all_names
     all_names = re.findall("((?:(?:[А-ЯЁ]\. ?){1,2}|[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)? )[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?)[^А-ЯЁа-яё]", text)
+    all_names.sort() #так красивее
+    for name in all_names :
+        print(name)
 
 def task3() :
     global text
@@ -30,8 +32,7 @@ def task3() :
         dot_index = name.rfind(".")
         divider_index = max(space_index, dot_index)
         last_name = name[divider_index + 1:]
-        # создание папки с именем last_name. exist_ok = True значит, что
-        # если папка уже существует, то программа не будет вылетать
+        # создание папки с именем last_name. exist_ok = True значит, что если папка уже существует, то программа не будет вылетать
         os.makedirs(last_name, exist_ok = True)
         file = open(last_name + "/" + name + ".txt", "w", encoding = "utf-8")
         regex = "[.?!…] ([^.]*?" + name.replace(".", "\.") + "[^.]*?[.?!…])"
